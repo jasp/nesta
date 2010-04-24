@@ -23,3 +23,17 @@
             %a{ :href => "http://effectif.com" } Graham Ashton
 
     = haml :analytics, :layout => false
+    :javascript
+      window.onload = function() {
+        var at = / at /;
+        var dot = / dot /g;
+        var spans = document.getElementsByTagName("span");
+        var hm = spans.length;
+        for (c=0;c<hm;c++) {
+          if(spans[c].className=="mailme"){
+            newcnt = spans[c].innerHTML.replace(at,"@");
+            newcnt = newcnt.replace(dot,".");
+            spans[c].innerHTML = '<a href="mailto:'+newcnt+'" title="Send en email!">'+newcnt+"</a>";
+          }
+        }
+      }
